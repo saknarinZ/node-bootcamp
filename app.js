@@ -1,19 +1,27 @@
 const fs = require('fs')
 const express = require('express');
-const { ESRCH } = require('constants');
 
 const app = express();
-
 app.use(express.json());
 
+app.use((req, res, next)=>{
+    console.log('hello from the middleware');
+    next();
+})
+
+app.use((req, res, next)=>{
+    req.requestTime = new Date().toISOString();
+    next();
+})
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
 
-
 const getAlltours = (req, res) => {
+    console.log(req.requestTime);
     res.status(200).json({
         status: 'success',
+        requestedAt: req.requestTime, 
         results: tours.length,
         data: {
             tours
@@ -102,6 +110,8 @@ const deleteTour = (req, res) => {
 app.route('/api/v1/tours')
 .get(getAlltours)
 .post(createTour);
+
+
 
 app.route('/api/v1/tours/:id')
 .get(getTour)
