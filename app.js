@@ -67,6 +67,24 @@ app.post('/api/v1/tours', (req, res) => {
 
 });
 
+app.patch('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+    if (req.params.id * 1 > tours.length) {
+        //404 Not Fountd
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        });
+    }
+    res.status(200).json({
+        status: 'seccess',
+        data: {
+            tour: '<Updated touer here...>'
+        }
+    })
+})
+
+
 app.delete('/api/v1/tours/:id', (req, res) => {
     console.log(req.params);
     if (req.params.id * 1 > tours.length) {
