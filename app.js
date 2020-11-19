@@ -24,7 +24,34 @@ app.get('/api/v1/tours', (req, res) => {
             tours
         }
     });
-    console.log(tours);
+
+});
+
+
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+
+    const id = req.params.id * 1;
+    // tours คือ ไฟล์ tours-simple.json find ค้นหาข้อมูลจาก tours-simple.json จากเงื่อนไข 
+    // id จาก tours-simple.json และ จาก input(คือ params) ต้องตรงกัน 
+    // ค้นหาเสร็จ ให้ส่งของมุล ไม่ยัง ตัวแปล tour 
+    const tour = tours.find(el => el.id === id);
+    
+    // if(id > tours.length) {
+    if(tour) {
+         //404 Not Fountd
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        });
+    }
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour // ข้อมูลจากการขค้นหา
+        }
+    });
+
 });
 
 
