@@ -43,14 +43,11 @@ Express_v12
 A Better Flir Structure
 
 Express_v13
-Param Middleware
+Param Middleware & Chaining multiple Middleware Functions
 
 Express_v14
-Chaining multiple Middleware Functions
-
-Express_v15
 Serving Static Files
 
-Express_v16
+Express_v15
 Environment Variables
 
